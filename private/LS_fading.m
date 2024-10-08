@@ -22,31 +22,21 @@ function [ gamma ] = LS_fading( N, type, lower_limit, upper_limit )
             beta        = 36.7;
             R           = 1; %km
             % Assume p(d) = 2d/R^2;
-            d = R*sqrt(rand(N,1));               
-
-            % path loss in DB normalized with noise density=170dBm/Hz and
-            % 10Mhz BW
-            z = -(alpha+beta*log10(d)) + 170 - 70+30;
-            
+            d = R*sqrt(rand(N,1));     
+            % path loss in DB normalized with noise density=170dBm/Hz and 10Mhz BW
+            z = -(alpha+beta*log10(d)) + 170 - 70+30;            
             gamma = 10.^(z./10);
-
         case 'shadowing_pathloss'
             alpha       = 128.1;
             beta        = 36.7;
             R           = 1; %km
             sigma_SF2   = 8;
             % Assume p(d) = 2d/R^2;
-            d = R*sqrt(rand(N,1));               
-            
+            d = R*sqrt(rand(N,1));  
             %shadowing
-            s = sqrt(sigma_SF2)*randn(N,1);
-            
-            % path loss in DB normalized with noise density=170dBm/Hz and
-            % 10Mhz BW
-            z = -(alpha+beta*log10(d)) - s + 170 - 70;
-            
+            s = sqrt(sigma_SF2)*randn(N,1);            
+            % path loss in DB normalized with noise density=170dBm/Hz and 10Mhz BW
+            z = -(alpha+beta*log10(d)) - s + 170 - 70;            
             gamma = 10.^(z./10);
     end
-
 end
-
